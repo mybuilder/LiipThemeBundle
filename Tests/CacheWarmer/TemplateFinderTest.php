@@ -45,7 +45,7 @@ class TemplateFinderTest extends \PHPUnit\Framework\TestCase
      */
     private $templateReference;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
         $this->kernel = $this->getMockForAbstractClass('\Symfony\Component\HttpKernel\KernelInterface');

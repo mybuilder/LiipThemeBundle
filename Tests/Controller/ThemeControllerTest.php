@@ -14,7 +14,7 @@ namespace Liip\ThemeBundle\Tests\Controller;
 use Liip\ThemeBundle\ActiveTheme;
 use Liip\ThemeBundle\Controller\ThemeController;
 use Liip\ThemeBundle\Tests\Common\Comparator\SymfonyResponse as SymfonyResponseComparator;
-use PHPUnit\Framework\MockObject\Matcher\Invocation;
+use PHPUnit\Framework\MockObject\Rule\InvokedCount;
 use SebastianBergmann\Comparator\Factory as ComparatorFactory;
 use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -112,7 +112,7 @@ class ThemeControllerTest extends \PHPUnit\Framework\TestCase
         $controller->switchAction($this->createRequestWithWrongTheme());
     }
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -120,7 +120,7 @@ class ThemeControllerTest extends \PHPUnit\Framework\TestCase
         ComparatorFactory::getInstance()->register($this->symfonyResponseComparator);
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         ComparatorFactory::getInstance()->unregister($this->symfonyResponseComparator);
         $this->symfonyResponseComparator = null;
@@ -129,11 +129,9 @@ class ThemeControllerTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @param Invocation $activeThemeInvocation
      * @param mixed[]|null $cookieOptions
-     * @return ThemeController
      */
-    private function createThemeController(Invocation $activeThemeInvocation, array $cookieOptions = null)
+    private function createThemeController(InvokedCount $activeThemeInvocation, array $cookieOptions = null): ThemeController
     {
         return new ThemeController(
             $this->createActiveThemeMock($activeThemeInvocation),
@@ -142,11 +140,7 @@ class ThemeControllerTest extends \PHPUnit\Framework\TestCase
         );
     }
 
-    /**
-     * @param Invocation $invocation
-     * @return ActiveTheme
-     */
-    private function createActiveThemeMock(Invocation $invocation)
+    private function createActiveThemeMock(InvokedCount $invocation): ActiveTheme
     {
         $mock = $this->createMock('\Liip\ThemeBundle\ActiveTheme');
 
@@ -167,13 +161,9 @@ class ThemeControllerTest extends \PHPUnit\Framework\TestCase
     {
         $request = new Request(array('theme' => self::RIGHT_THEME));
 
-        $request->headers->add(
-            array('Referer' => array($referer))
-        );
+        $request->headers->add(['Referer' => ($referer)]);
 
-        $request->server->add(
-            array('REQUEST_TIME' => self::REQUEST_TIME)
-        );
+        $request->server->add(['REQUEST_TIME' => self::REQUEST_TIME]);
 
         return $request;
     }

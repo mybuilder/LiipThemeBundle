@@ -46,7 +46,7 @@ class TemplatePathsCacheWarmerTest extends \PHPUnit\Framework\TestCase
     private $cacheDir;
     private $templateCacheFile;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
         $this->cacheDir = __DIR__.'/../Fixtures/cachedir';
@@ -64,7 +64,7 @@ class TemplatePathsCacheWarmerTest extends \PHPUnit\Framework\TestCase
             ->getMock();
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         parent::tearDown();
         @unlink($this->templateCacheFile);
