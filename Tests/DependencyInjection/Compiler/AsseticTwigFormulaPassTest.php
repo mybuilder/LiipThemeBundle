@@ -20,7 +20,7 @@ class AsseticTwigFormulaPassTest extends \PHPUnit\Framework\TestCase
     private $definition;
     private $pass;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->container = $this->getMockBuilder('Symfony\Component\DependencyInjection\ContainerBuilder')
             ->disableOriginalConstructor()

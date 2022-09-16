@@ -32,8 +32,8 @@ class Configuration implements ConfigurationInterface
      */
     public function getConfigTreeBuilder()
     {
-        $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('liip_theme', 'array');
+        $treeBuilder = new TreeBuilder('liip_theme');
+        $rootNode = $treeBuilder->getRootNode();
         $rootNode
             ->children()
                 ->arrayNode('themes')

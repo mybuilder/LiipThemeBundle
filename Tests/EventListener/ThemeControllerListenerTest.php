@@ -27,7 +27,7 @@ class ThemeControllerListenerTest extends \PHPUnit\Framework\TestCase
      */
     private $request;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->request = Request::create('/foo');
     }

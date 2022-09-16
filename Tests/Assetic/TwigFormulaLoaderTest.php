@@ -46,7 +46,7 @@ class TwigFormulaLoaderTest extends \PHPUnit\Framework\TestCase
      */
     private $loader;
 
-    public function setUp()
+    public function setUp(): void
     {
         if (!class_exists(\Assetic\AssetManager::class)) {
             $this->markTestSkipped('Assetic not supported');

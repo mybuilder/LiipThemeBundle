@@ -19,6 +19,9 @@ class FilesystemLoaderTest extends \PHPUnit\Framework\TestCase
             ->method('locate')
             ->will($this->returnValue(__DIR__.'/Fixtures/Resources/views/layout.html.twig'));
 
+        $parser
+            ->method('parse')
+            ->willReturn('');
 
         $loader = new FilesystemLoader($locator, $parser);
         $loader->setActiveTheme($activeTheme);
@@ -37,6 +40,10 @@ class FilesystemLoaderTest extends \PHPUnit\Framework\TestCase
             ->expects($this->once())
             ->method('locate')
             ->willThrowException(new \RuntimeException());
+
+        $parser
+            ->method('parse')
+            ->willReturn('');
 
         $loader = new FilesystemLoader($locator, $parser);
         $loader->addPath(__DIR__.'/Fixtures/Resources/views', 'namespace');
